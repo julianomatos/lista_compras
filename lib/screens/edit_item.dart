@@ -22,9 +22,9 @@ class EditItem extends StatelessWidget {
     return Consumer<ItemProvider>(builder: (context, itemProvider, _) {
       ShoppingItem item = itemProvider.showItem(index);
       _name.text = item.name;
-      _date.text = DataUtils.formatDate(item.purchaseDate);
+      _date.text = DataUtils.formatDate(item.purchaseDate!);
       selectedDateTime = item.purchaseDate;
-      _location.text = item.purchaseLocation;
+      _location.text = item.purchaseLocation!;
       return Scaffold(
         appBar: AppBar(
           title: const Text('Editar Item'),

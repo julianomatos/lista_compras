@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
@@ -17,14 +16,14 @@ class ListItems extends StatefulWidget {
 }
 
 class _ListItemState extends State<ListItems> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Consumer<ItemProvider>(
       builder: (context, itemProvider, _) {
-        
         List<ShoppingItem> items = itemProvider.items;
+
+        items.sort(
+            (a, b) => a.isBought == b.isBought ? 0 : (a.isBought ? 1 : -1));
 
         return Scaffold(
           appBar: AppBar(
@@ -37,16 +36,51 @@ class _ListItemState extends State<ListItems> {
               return Card(
                 elevation: 8,
                 margin: const EdgeInsets.symmetric(
-                  vertical: 10,
+                  vertical: 5,
                   horizontal: 10,
                 ),
                 child: ListTile(
-                  title: Text(item.name),
-                  subtitle: Text('${item.quantity} -  ${item.unit}'),
+                  title: item.isBought
+                      ? Text(
+                           '${item.name} - ${item.quantity} ${item.unit}.',
+                          style: TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                        )
+                      : Text('${item.name} - ${item.quantity} ${item.unit}.'),
+                  subtitle: item.isBought 
+                  ? Text(
+                    // 'Última compra: R\$ ${item.price} em  ${DataUtils.formatDate(item.purchaseDate!)}',
+                    item.price.toString(),
+                     style: TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                          ),
+                    )
+                    :  Text(
+                       item.price.toString(),
+                    // 'Última compra: R\$ ${item.price} em  ${DataUtils.formatDate(item.purchaseDate!)}'
+                    ),
                   // subtitle: Text(DataUtils.formatDate(item.purchaseDate)),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      IconButton(
+                        icon: Icon(Icons.shopping_cart),
+                        onPressed: () async {
+                          final updatedItem = ShoppingItem(
+                            name: item.name,
+                            price: item.price,
+                            brand: item.brand,
+                            unit: item.unit,
+                            quantity: item.quantity,
+                            purchaseDate: DateTime.now(),
+                            purchaseLocation: await DataUtils.getLocation(),
+                            isBought: true,
+                          );
+
+                          itemProvider.editItem(index, updatedItem);
+                        },
+                      ),
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
@@ -83,5 +117,4 @@ class _ListItemState extends State<ListItems> {
       },
     );
   }
-
 }

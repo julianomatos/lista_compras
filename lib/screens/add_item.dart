@@ -69,32 +69,39 @@ class AddItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                 Card(
-                  elevation: 8,
-                  child: ListTile(
-                    title: TextField(
-                      controller: _price,
-                      decoration: const InputDecoration(
-                        labelText: "Preço",
+                Row(
+                  children: [
+                    Expanded(
+                      child: Card(
+                        elevation: 8,
+                        child: ListTile(
+                          title: TextField(
+                            controller: _price,
+                            decoration: const InputDecoration(
+                              labelText: "Preço",
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                Card(
-                  elevation: 8,
-                  child: ListTile(
-                    title: TextField(
-                      controller: _brand,
-                      decoration: const InputDecoration(
-                        labelText: "Marca",
+                    Expanded(
+                      child: Card(
+                        elevation: 8,
+                        child: ListTile(
+                          title: TextField(
+                            controller: _brand,
+                            decoration: const InputDecoration(
+                              labelText: "Marca",
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ],
             ),
           ),
-        
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.save),
             onPressed: () {
@@ -105,8 +112,8 @@ class AddItem extends StatelessWidget {
                   brand: '',
                   unit: _selectedUnit,
                   quantity: int.parse(_quantity.text),
-                  purchaseDate: DateTime.now(),
-                  purchaseLocation: '',
+                  // purchaseDate: DateTime.now(),
+                  // purchaseLocation: '',
                   isBought: false,
                 );
 

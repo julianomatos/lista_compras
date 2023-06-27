@@ -9,9 +9,14 @@ class DataUtils {
     'fd',
   ];
 
-  static String formatDate(DateTime data) {
+  static String formatDateTime(DateTime data) {
     String newData =
         '${data.day.toString().padLeft(2, '0')}/${data.month.toString().padLeft(2, '0')}/${data.year.toString()}  ${data.hour.toString().padLeft(2, '0')}:${data.minute.toString().padLeft(2, '0')}';
+    return newData;
+  }
+   static String formatDate(DateTime data) {
+    String newData =
+        '${data.day.toString().padLeft(2, '0')}/${data.month.toString().padLeft(2, '0')}/${data.year.toString()}';
     return newData;
   }
 
