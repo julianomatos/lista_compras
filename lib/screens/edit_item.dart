@@ -11,7 +11,6 @@ class EditItem extends StatelessWidget {
   DateTime? selectedDateTime;
   final _date = TextEditingController();
   final _name = TextEditingController();
-  final _unity= TextEditingController();
   final _quantity = TextEditingController();
   final _price = TextEditingController();
 

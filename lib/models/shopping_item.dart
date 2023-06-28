@@ -1,4 +1,5 @@
 class ShoppingItem {
+  String? id;
   String name;
   double price;
   String observation;
@@ -18,4 +19,25 @@ class ShoppingItem {
     this.purchaseLocation,
     required this.isBought,
   });
+
+  ShoppingItem.fromJson(String this.id, Map<String, dynamic> json)
+      : name = json['name'],
+        price = json['price'],
+        observation = json['observation'],
+        unit = json['unit'],
+        purchaseDate = json['purchaseDate'],
+        quantity = json['quantity'],
+        purchaseLocation = json['purchaseLocation'],
+        isBought = json['isBought'];
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'price': price,
+        'observation': observation,
+        'unit': unit,
+        'quantity': quantity,
+        'purchaseDate': purchaseDate,
+        'purchaseLocation': purchaseLocation,
+        'isBought': isBought,
+      };
 }

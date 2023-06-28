@@ -7,8 +7,15 @@ import 'package:lista_compras/screens/edit_item.dart';
 import 'package:lista_compras/screens/list_items.dart';
 import 'package:provider/provider.dart';
 import 'routes/routes_path.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(ChangeNotifierProvider(
       create: (context) => ItemProvider(),
       child: MyApp(),

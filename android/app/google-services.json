@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "674427696556",
+    "project_id": "lista-compras-14098",
+    "storage_bucket": "lista-compras-14098.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674427696556:android:fbbeca7cb3a7cd2d577609",
+        "android_client_info": {
+          "package_name": "com.example.lista_compras"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "674427696556-91ih11ekoias267o73q8io43r1a8na8k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6tcAE706Qbl4JiX29Iu0PyUBifnSdE_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "674427696556-91ih11ekoias267o73q8io43r1a8na8k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
