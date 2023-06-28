@@ -13,7 +13,10 @@ class EditItem extends StatelessWidget {
   final _name = TextEditingController();
   final _unity= TextEditingController();
   final _quantity = TextEditingController();
+  final _price = TextEditingController();
+
   final _location = TextEditingController();
+  String _selectedUnit = '';
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,10 @@ class EditItem extends StatelessWidget {
       ShoppingItem item = itemProvider.showItem(index);
       _name.text = item.name;
       _date.text = DataUtils.formatDate(item.purchaseDate!);
-      selectedDateTime = item.purchaseDate;
+      selectedDateTime = item.purchaseDate!;
+      _selectedUnit = item.unit;
+      _price.text = item.price.toString();
+      _quantity.text = item.quantity.toString();
       _location.text = item.purchaseLocation!;
       return Scaffold(
         appBar: AppBar(
@@ -45,45 +51,108 @@ class EditItem extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16.0),
-            Card(
-              elevation: 8,
-              child: ListTile(
-                title: TextField(
-                  enabled: false,
-                  controller: _date,
-                  decoration: const InputDecoration(
-                    labelText: 'Data da Compra',
-                  ),
+            Row(
+                  children: [
+                    Expanded(
+                      child: Card(
+                        elevation: 8,
+                        child: ListTile(
+                          title: TextField(
+                            controller: _quantity,
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              labelText: "Quantidade",
+                              hintText: 'Quantidade a ser comprada',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Card(
+                        elevation: 8,
+                        child: ListTile(
+                          title: DropdownButtonFormField<String>(
+                            items: DataUtils.unitTypes.map((String unit) {
+                              return DropdownMenuItem<String>(
+                                value: unit,
+                                child: Text(unit),
+                              );
+                            }).toList(),
+                            value: item.unit,
+                            decoration: const InputDecoration(
+                              labelText: "Unidade",
+                            ),
+                            onChanged: (child) {
+                              _selectedUnit = child!;
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                trailing: IconButton(
-                  icon: const Icon(Icons.edit_calendar),
-                  iconSize: 32,
-                  color: Colors.black87,
-                  onPressed: () async {
-                    final selectedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2021),
-                        lastDate: DateTime(2024),
-                      );
-                      // ignore: use_build_context_synchronously
-                      final selectedTime = await showTimePicker(
-                          context: context,
-                          initialTime: TimeOfDay.now());
-                      if (selectedDate != null && selectedTime != null) {
-                        selectedDateTime = DateTime(
-                            selectedDate.year,
-                            selectedDate.month,
-                            selectedDate.day,
-                            selectedTime.hour,
-                            selectedTime.minute,
-                          );
-                        _date.text = DataUtils.formatDate(selectedDateTime!);
-                      }
-                  },
+              Row(
+                  children: [
+                    Expanded(
+                      child: Card(
+                        elevation: 8,
+                        child: ListTile(
+                          title: TextField(
+                            controller: _price,
+                            decoration: const InputDecoration(
+                              labelText: "Preço",
+                              hintText: 'Último preço pago',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Card(
+                        elevation: 8,
+                        child: ListTile(
+                          title: TextField(
+                            enabled: false,
+                            controller: _date,
+                            decoration: const InputDecoration(
+                              labelText: 'Data',
+                            ),
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.edit_calendar),
+                            iconSize: 32,
+                            color: Colors.black87,
+                            onPressed: () async {
+                              final selectedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2021),
+                                lastDate: DateTime(2024),
+                              );
+                              // ignore: use_build_context_synchronously
+                              final selectedTime = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now());
+                              if (selectedDate != null &&
+                                  selectedTime != null) {
+                                selectedDateTime = DateTime(
+                                  selectedDate.year,
+                                  selectedDate.month,
+                                  selectedDate.day,
+                                  selectedTime.hour,
+                                  selectedTime.minute,
+                                );
+                                _date.text =
+                                    DataUtils.formatDate(selectedDateTime!);
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
             const SizedBox(height: 16.0),
             Card(
               elevation: 8,
@@ -116,13 +185,13 @@ class EditItem extends StatelessWidget {
             if (_name.text.isNotEmpty && _location.text.isNotEmpty) {
               final updatedItem = ShoppingItem(
                   name: _name.text,
-                  price: 0,
-                  brand: '',
-                  unit: _unity.text,
+                  price: double.parse(_price.text),
+                  observation: '',
+                  unit: _selectedUnit,
                   quantity:  int.parse(_quantity.text) ,
-                  purchaseDate: DateTime.now(),
-                  purchaseLocation: '',
-                  isBought: false,
+                  purchaseDate: selectedDateTime,
+                  purchaseLocation: _location.text,
+                  isBought: item.isBought,
                 );
 
               itemProvider.editItem(index, updatedItem);

@@ -1,11 +1,13 @@
 import 'package:location/location.dart';
 
+
+
 class DataUtils {
   static List<String> unitTypes = [
     'un',
     'kg',
-    'dz',
     'cx',
+    'dz',
     'fd',
   ];
 
@@ -39,4 +41,7 @@ class DataUtils {
     locationData = await location.getLocation();
     return "${locationData.latitude} : ${locationData.longitude}";
   }
+
+  
+
 }

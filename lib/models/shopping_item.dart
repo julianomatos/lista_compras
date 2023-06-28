@@ -1,7 +1,7 @@
 class ShoppingItem {
   String name;
   double price;
-  String brand;
+  String observation;
   String unit;
   int quantity;
   DateTime? purchaseDate;
@@ -11,7 +11,7 @@ class ShoppingItem {
   ShoppingItem({
     required this.name,
     required this.price,
-    required this.brand,
+    required this.observation,
     required this.unit,
     required this.quantity,
     this.purchaseDate,
