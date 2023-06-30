@@ -2,45 +2,53 @@
 
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:lista_compras/models/shopping_item.dart';
 import 'package:lista_compras/repositories/items_repository.dart';
 
-class ProductsService {
-  final ItemsRepository _itemsRepository = ItemsRepository('shopping_item');
+class ItemsService with ChangeNotifier {
+  final ItemsRepository _itemsRepository = ItemsRepository();
 
   Future<List<ShoppingItem>> list() async {
     try {
       final List<ShoppingItem> list = [];
       final response = await _itemsRepository.list();
       final docs = response.docs;
+
       for (var doc in docs) {
         list.add(ShoppingItem.fromJson(doc.id, doc.data()));
       }
+      
+
       return list;
     } catch (err) {
+      print('Erro ao consultar lista: $err');
       throw Exception("Erro: Problemas ao consultar lista.");
     }
   }
 
   Future<String> insert(ShoppingItem item) async {
-     try {
+    try {
       final response = await _itemsRepository.insert(item.toJson());
+
+      notifyListeners();
+
       return response.id;
-      
     } catch (err) {
       throw Exception("Erro: Problemas ao inserir.");
     }
   }
-Future<ShoppingItem> show(String productId) async {
-   try {
-      final response = await _itemsRepository.show(productId);
+
+  Future<ShoppingItem> show(String itemId) async {
+    try {
+      final response = await _itemsRepository.show(itemId);
       if (response.exists) {
         return ShoppingItem.fromJson(response.id, response.data()!);
       } else {
-        throw Exception("Produto não encontrado");
+        throw Exception("Item não encontrado");
       }
     } catch (err) {
-      throw Exception("Erro: Problemas ao exibir o produto.");
+      throw Exception("Erro: Problemas ao exibir o item.");
     }
   }
 
@@ -59,5 +67,4 @@ Future<ShoppingItem> show(String productId) async {
       throw Exception("Erro: Problemas ao excluir o produto.");
     }
   }
-  
 }

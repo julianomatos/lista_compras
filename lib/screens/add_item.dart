@@ -1,11 +1,13 @@
 // ignore_for_file: avoid_types_as_parameter_names, must_be_immutable, use_key_in_widget_constructors, null_check_always_fails
 
 import 'package:flutter/material.dart';
-import 'package:lista_compras/providers/item_provider.dart';
+// import 'package:lista_compras/providers/item_provider.dart';
+import 'package:lista_compras/services/items_service.dart';
 import 'package:lista_compras/utils/data_utils.dart';
 import '../components/footer.dart';
 import '../models/shopping_item.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
+// import '../services/items_service.dart';
 
 class AddItem extends StatelessWidget {
   final _name = TextEditingController();
@@ -16,8 +18,9 @@ class AddItem extends StatelessWidget {
   DateTime selectedDateTime = DateTime(2023, 1, 1, 0, 0, 0);
   @override
   Widget build(BuildContext context) {
-    return Consumer<ItemProvider>(
-      builder: (context, itemProvider, _) {
+    // return 
+    // Consumer<ItemProvider>(
+    //   builder: (context, itemProvider, _) {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Incluir item'),
@@ -166,7 +169,8 @@ class AddItem extends StatelessWidget {
                   isBought: false,
                 );
 
-                itemProvider.addItem(item);
+                // itemProvider.addItem(item);
+                ItemsService().insert(item);
                 Navigator.pop(context);
               } else {
                 showDialog(
@@ -189,7 +193,7 @@ class AddItem extends StatelessWidget {
           ),
           bottomNavigationBar: const Footer(),
         );
-      },
-    );
-  }
+      }
+  //   );
+  // }
 }

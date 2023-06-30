@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ItemsRepository {
   final db = FirebaseFirestore.instance;
  
-  final String _collection; //collection
-  ItemsRepository(this._collection);
+  final String _collection = 'shopping_item'; //collection
+  ItemsRepository();
 
  Future<QuerySnapshot<Map<String, dynamic>>> list() {
     return db.collection(_collection).get();

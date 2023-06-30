@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ShoppingItem {
   String? id;
   String name;
@@ -25,7 +27,7 @@ class ShoppingItem {
         price = json['price'],
         observation = json['observation'],
         unit = json['unit'],
-        purchaseDate = json['purchaseDate'],
+        purchaseDate = (json['purchaseDate'] as Timestamp).toDate(),
         quantity = json['quantity'],
         purchaseLocation = json['purchaseLocation'],
         isBought = json['isBought'];

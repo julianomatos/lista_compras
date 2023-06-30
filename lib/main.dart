@@ -1,10 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:lista_compras/providers/item_provider.dart';
+// import 'package:lista_compras/providers/item_provider.dart';
 import 'package:lista_compras/screens/add_item.dart';
 import 'package:lista_compras/screens/delete_item.dart';
 import 'package:lista_compras/screens/edit_item.dart';
 import 'package:lista_compras/screens/list_items.dart';
+import 'package:lista_compras/services/items_service.dart';
 import 'package:provider/provider.dart';
 import 'routes/routes_path.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,7 +18,8 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(ChangeNotifierProvider(
-      create: (context) => ItemProvider(),
+      // create: (context) => ItemProvider(),
+      create: (context) => ItemsService(),
       child: MyApp(),
     ));
 }

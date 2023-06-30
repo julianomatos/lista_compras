@@ -1,5 +1,8 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/foundation.dart';
 import '../models/shopping_item.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ItemProvider with ChangeNotifier {
   final List<ShoppingItem> _items = [
