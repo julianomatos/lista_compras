@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../components/items.dart';
 
-class ItemsList extends StatelessWidget {
-  const ItemsList({Key? key});
+class ItemsCart extends StatelessWidget {
+  const ItemsCart({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,29 +27,27 @@ class ItemsList extends StatelessWidget {
         } else if (snapshot.hasData) {
           final list = snapshot.data;
           if (list != null && list.isNotEmpty) {
-            final notPurchasedItems =
-                list.where((item) => !item.isBought).toList();
-            final purchasedItems = list.where((item) => item.isBought).toList();
-            notPurchasedItems.addAll(purchasedItems);
-            if (notPurchasedItems.isNotEmpty) {
-              return Flexible(
+            final purchasedItems =
+                list.where((item) => item.isBought).toList();
+            if (purchasedItems.isNotEmpty) {
+              return Expanded(
                 child: ListView(
-                  children: generateListProduct(notPurchasedItems),
+                  children: generateListProduct(purchasedItems),
                 ),
               );
             } else {
               return const Center(
-                child: Text('Nenhum item na lista.'),
+                child: Text('Carrinho Vazio.'),
               );
             }
           } else {
             return const Center(
-              child: Text('Nenhum item cadastrado.'),
+              child: Text('Sem itens na lista.'),
             );
           }
         } else {
           return const Center(
-            child: Text('Nenhum item cadastrado.'),
+            child: Text('Sem itens na lista.'),
           );
         }
       },

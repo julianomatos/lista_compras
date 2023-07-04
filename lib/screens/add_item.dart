@@ -160,7 +160,8 @@ class AddItem extends StatelessWidget {
               if (_name.text.isNotEmpty) {
                 final item = ShoppingItem(
                   name: _name.text,
-                  price: double.parse(_price.text),
+                  price: _price.text.isNotEmpty ? double.parse(_price.text): 0,
+                  // price: 0,
                   observation: '',
                   unit: _selectedUnit,
                   quantity: int.parse(_quantity.text),

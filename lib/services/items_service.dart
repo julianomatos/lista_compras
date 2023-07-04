@@ -5,8 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lista_compras/models/shopping_item.dart';
 import 'package:lista_compras/repositories/items_repository.dart';
+import 'package:provider/provider.dart';
 
-class ItemsService with ChangeNotifier {
+class ItemsService with ChangeNotifier{
   final ItemsRepository _itemsRepository = ItemsRepository();
 
   Future<List<ShoppingItem>> list() async {
@@ -22,7 +23,7 @@ class ItemsService with ChangeNotifier {
 
       return list;
     } catch (err) {
-      print('Erro ao consultar lista: $err');
+     // print('Erro ao consultar lista: $err');
       throw Exception("Erro: Problemas ao consultar lista.");
     }
   }
@@ -58,6 +59,7 @@ class ItemsService with ChangeNotifier {
     } catch (err) {
       throw Exception("Erro: Problemas ao atualizar o produto.");
     }
+     notifyListeners();
   }
 
   Future<void> delete(String productId) async {
@@ -66,5 +68,6 @@ class ItemsService with ChangeNotifier {
     } catch (err) {
       throw Exception("Erro: Problemas ao excluir o produto.");
     }
+     notifyListeners();
   }
 }

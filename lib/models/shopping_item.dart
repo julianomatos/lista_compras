@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ShoppingItem {
   String? id;
   String name;
-  double price;
+  double? price;
   String observation;
   String unit;
   int quantity;
@@ -13,13 +13,14 @@ class ShoppingItem {
 
   ShoppingItem({
     required this.name,
-    required this.price,
+    this.price,
     required this.observation,
     required this.unit,
     required this.quantity,
     this.purchaseDate,
     this.purchaseLocation,
     required this.isBought,
+    this.id,
   });
 
   ShoppingItem.fromJson(String this.id, Map<String, dynamic> json)

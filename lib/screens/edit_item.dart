@@ -14,7 +14,6 @@ class EditItem extends StatelessWidget {
   final _name = TextEditingController();
   final _quantity = TextEditingController();
   final _price = TextEditingController();
-
   final _location = TextEditingController();
   String _selectedUnit = '';
 
@@ -30,7 +29,7 @@ class EditItem extends StatelessWidget {
     _selectedUnit = item.unit;
     _price.text = item.price.toString();
     _quantity.text = item.quantity.toString();
-    _location.text = item.purchaseLocation!;
+    // _location.text = item.purchaseLocation!;
     // return
     // Consumer<ItemProvider>(builder: (context, itemProvider, _) {
     // ShoppingItem item = itemProvider.showItem(index);
@@ -83,7 +82,7 @@ class EditItem extends StatelessWidget {
                           child: Text(unit),
                         );
                       }).toList(),
-                      value: item.unit,
+                      value: item.unit.isNotEmpty ? item.unit : 'un',
                       decoration: const InputDecoration(
                         labelText: "Unidade",
                       ),

@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ItemsRepository {
   final db = FirebaseFirestore.instance;
- 
+
   final String _collection = 'shopping_item'; //collection
   ItemsRepository();
 
- Future<QuerySnapshot<Map<String, dynamic>>> list() {
+  Future<QuerySnapshot<Map<String, dynamic>>> list() {
     return db.collection(_collection).get();
   }
 
@@ -33,6 +33,33 @@ class ItemsRepository {
     // Obtendo a coleção "produtos" do Firestore
     QuerySnapshot snapshot =
         await FirebaseFirestore.instance.collection('shopping_item').get();
+
+    // Iterando sobre os documentos da coleção
+    for (QueryDocumentSnapshot doc in snapshot.docs) {
+      // Obtendo a quantidade e o preço de cada produto
+      if (doc.exists) {
+        int quantidade = (doc.data() as Map<String, dynamic>)['quantity'];
+        double preco = (doc.data() as Map<String, dynamic>)['price'];
+
+        // Calculando o valor total do produto
+        double valorProduto = quantidade * preco;
+
+        // Adicionando o valor do produto ao valor total
+        valorTotal += valorProduto;
+      }
+    }
+
+    return valorTotal;
+  }
+
+  Future<double> cartTotal() async {
+    double valorTotal = 0.0;
+
+    // Obtendo a coleção "shopping_item" do Firestore
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('shopping_item')
+        .where('isBought', isEqualTo: true)
+        .get();
 
     // Iterando sobre os documentos da coleção
     for (QueryDocumentSnapshot doc in snapshot.docs) {

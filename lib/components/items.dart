@@ -30,12 +30,13 @@ class _ItemState extends State<Item> {
                   horizontal: 10,
                 ),
                 child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 8),
                   leading: !widget.shoppingItem.isBought ? IconButton(
                         icon: Icon(Icons.shopping_cart),
                         onPressed: () async {
                           TextEditingController priceController =
                               TextEditingController(
-                                  text: widget.shoppingItem.price.toStringAsFixed(2));
+                                  text: widget.shoppingItem.price?.toStringAsFixed(2));
                           TextEditingController quantityController =
                               TextEditingController(
                                   text: widget.shoppingItem.quantity.toString());
@@ -147,7 +148,7 @@ class _ItemState extends State<Item> {
                        : Text(widget.shoppingItem.name),
                    subtitle: widget.shoppingItem.isBought
                       ? Text(
-                           '${widget.shoppingItem.quantity} ${widget.shoppingItem.unit}. R\$ ${widget.shoppingItem.price.toStringAsFixed(2)}',
+                           '${widget.shoppingItem.quantity} ${widget.shoppingItem.unit}. R\$ ${widget.shoppingItem.price?.toStringAsFixed(2)}',
                        )
                       : Text(
                           'Susgestão: ${widget.shoppingItem.quantity} ${widget.shoppingItem.unit}.',
@@ -170,7 +171,7 @@ class _ItemState extends State<Item> {
                        onPressed: () {
                            Navigator.of(context).pushNamed(
                              RoutePaths.ITEM_DELETE_SCREEN,
-                             arguments: widget.shoppingItem.id,
+                             arguments: widget.shoppingItem,
                            );
                          },
                        ),
