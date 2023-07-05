@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lista_compras/screens/add_item.dart';
 import 'package:lista_compras/screens/delete_item.dart';
 import 'package:lista_compras/screens/edit_item.dart';
-import 'package:lista_compras/screens/list_items.dart';
+import 'package:lista_compras/screens/list_items_screen.dart';
 import 'package:lista_compras/services/items_service.dart';
 import 'package:provider/provider.dart';
 import 'routes/routes_path.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         //
       ),
       routes: {
-        RoutePaths.HOME: (context) => const ListItems(),
+        RoutePaths.HOME: (context) => const ListItemsScreen(),
         RoutePaths.ITEM_ADD_SCREEN: (context) => AddItem(),
         RoutePaths.ITEM_UPDATE_SCREEN: (context) => EditItem(),
         RoutePaths.ITEM_DELETE_SCREEN: (context) => DeleteItem(),

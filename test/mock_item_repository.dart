@@ -8,23 +8,14 @@ class MockItemsRepository extends Mock implements ItemsRepository {}
 
 void main() {
   late ItemsService itemsService;
-  late ItemsRepository itemsRepository;
   late MockItemsRepository mockItemsRepository;
 
   setUp(() {
     mockItemsRepository = MockItemsRepository();
     itemsService = ItemsService();
-    itemsRepository = mockItemsRepository;
   });
 
   group('ItemsService', () {
-    final mockItem = ShoppingItem(
-        id: '1',
-        name: 'Item 1',
-        isBought: false,
-        observation: '',
-        quantity: 0,
-        unit: 'un');
 
     // test('list should return a list of ShoppingItems', () async {
     //   final mockResponse = [mockItem];

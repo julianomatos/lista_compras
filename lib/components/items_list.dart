@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +12,9 @@ class ItemsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> generateListProduct(List<ShoppingItem> items) {
-      return items.map((item) => Item(item)).toList();
-    }
+    // List<Widget> generateListProduct(List<ShoppingItem> items) {
+    //   return items.map((item) => Item(item)).toList();
+    // }
 
     return Consumer<ItemsService>(
       builder: (context, itemsService, _) {
@@ -72,3 +74,4 @@ class ItemsList extends StatelessWidget {
     );
   }
 }
+

@@ -1,7 +1,8 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import '../models/shopping_item.dart';
 import '../services/items_service.dart';
 import 'package:flutter/material.dart';
-
 import '../components/items.dart';
 
 class ItemsCart extends StatelessWidget {

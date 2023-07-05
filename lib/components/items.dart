@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:lista_compras/services/items_service.dart';
 import 'package:provider/provider.dart';
@@ -156,7 +156,7 @@ class _ItemState extends State<Item> {
                   '${widget.shoppingItem.quantity} ${widget.shoppingItem.unit}. R\$ ${widget.shoppingItem.price?.toStringAsFixed(2)}',
                 )
               : Text(
-                  'Susgestão: ${widget.shoppingItem.quantity} ${widget.shoppingItem.unit}.',
+                  '${widget.shoppingItem.quantity} ${widget.shoppingItem.unit}.',
                 ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
