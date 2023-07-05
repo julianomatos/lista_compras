@@ -22,6 +22,8 @@ class DeleteItem extends StatelessWidget {
     //       name = item.name;
     //       // date = task.date.toString().substring(0, 10);
     //     }
+      return  Consumer<ItemsService>(
+      builder: (context, itemsService, _) {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Deletar Item'),
@@ -64,7 +66,7 @@ class DeleteItem extends StatelessWidget {
                     TextButton(
                       child: Text('SIM'),
                       onPressed: () {
-                        ItemsService().delete(item.id!);
+                        itemsService.delete(item.id!);
                         Navigator.pop(context);
                         Navigator.pop(context);
                       },
@@ -84,6 +86,6 @@ class DeleteItem extends StatelessWidget {
           bottomNavigationBar: Footer(),
         );
       }
-    // );
-  // }
+    );
+  }
 }

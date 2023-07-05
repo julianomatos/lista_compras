@@ -28,17 +28,20 @@ class _ListItemState extends State<ListItems> {
       appBar: AppBar(
         title: const Text('Lista de Compras'),
       ),
-      body: Consumer<ItemsService>(
-        builder: (context, itemsService, _) {
-          return Column(
+      body:
+      //  Consumer<ItemsService>(
+      //   builder: (context, itemsService, _) {
+          // return 
+          Column(
             children: const [
+              Center(child: Text('Lista de itens pendentes.')),
               ItemsList(),
               // SizedBox(height: 10),
               // ItemsCart(),
             ],
-          );
-        },
-      ),
+          ),
+      //   },
+      // ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
